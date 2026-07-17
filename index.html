@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Ulang Tahun Sayang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+</head>
+<body>
+
+<audio id="bg-music" loop src="audio/audio1.mp3"></audio>
+<canvas id="fireworksCanvas"></canvas>
+
+<div class="page" id="sec-hero">
+  <div class="container">
+    <div class="text-side">
+      <div class="eyebrow">HAPPY BIRTHDAY</div>
+
+      <h1 class="title">
+        Selamat<br>
+        Ulang Tahun<br>
+        <span class="name">Sayang</span>
+      </h1>
+
+      <p class="desc">
+        Di hari yang paling spesial ini, aku ingin kamu tahu betapa berarti dan
+        berharganya kamu dalam hidupku. Kamu adalah hadiah terindahku.
+      </p>
+
+      <div class="countdown-wrap">
+        <div class="countdown-label">HITUNG MUNDUR MENUJU HARI SPESIALMU</div>
+        <div class="countdown">
+          <div class="count-box"><div class="num" id="cd-days">00</div><div class="unit">HARI</div></div>
+          <div class="count-box"><div class="num" id="cd-hours">00</div><div class="unit">JAM</div></div>
+          <div class="count-box"><div class="num" id="cd-mins">00</div><div class="unit">MENIT</div></div>
+          <div class="count-box"><div class="num" id="cd-secs">00</div><div class="unit">DETIK</div></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary primary-btn" onclick="jalankanRayakan()">🎉 Rayakan!</button>
+        <button class="btn btn-outline" onclick="scrollToSection('sec-letter')">✉️ Baca Suratku</button>
+      </div>
+    </div>
+
+    <div class="photo-side">
+      <div class="photo-frame">
+        <img src="galeri/foto1.jpeg" alt="Foto kenangan">
+      </div>
+
+      <div class="music-widget">
+        <div class="music-card">
+          <div class="music-card-top">
+            <div>
+              <div class="music-label">🎵 Play Birthday Song</div>
+              <p class="music-subtitle">Tap the button to play a special song.</p>
+            </div>
+            <button class="music-play-btn" id="music-btn-toggle" aria-label="Toggle music playback">
+              <svg viewBox="0 0 24 24" id="play-icon" class="music-play-icon" aria-hidden="true">
+                <path d="M5 3l14 9-14 9V3z"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="music-progress-wrap">
+            <div class="music-progress-bar" id="music-progress-bar">
+              <div class="music-progress-fill" id="music-progress"></div>
+            </div>
+            <div class="music-time">
+              <span id="current-time">0:00</span>
+              <span id="duration-time">0:00</span>
+            </div>
+          </div>
+
+          <div class="music-volume-wrap">
+            <label for="volume-slider">Vol</label>
+            <input id="volume-slider" type="range" min="0" max="1" step="0.01" value="0.8">
+          </div>
+        </div>
+
+        <div class="now-playing-text" id="now-playing-text">Now Playing ❤️ Happy Birthday My Love</div>
+        <div class="floating-hearts" id="floating-hearts" aria-hidden="true">
+          <span class="floating-heart">❤️</span>
+          <span class="floating-heart">💗</span>
+          <span class="floating-heart">💕</span>
+        </div>
+      </div>
+
+      <div class="heart-badge">❤️</div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator" onclick="scrollToSection('sec-letter')">
+    <span>SCROLL</span>
+    <span class="chevron">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b5f5c" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </span>
+  </div>
+</div>
+
+<div class="section-container letter-section" id="sec-letter">
+  <div class="letter-grid">
+    <div class="letter-photo-column">
+      <div class="polaroid-card">
+        <div class="photo-tape"></div>
+        <div class="polaroid-image">
+          <img src="galeri/foto2.jpeg" alt="Momen spesial bersama">
+        </div>
+        <div class="polaroid-caption">
+          <h3>Dibalik Kenangan</h3>
+          <p>Setiap foto adalah bukti bahwa cerita cinta ini terus tumbuh dan makin indah.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="letter-copy-column">
+      <div class="section-header">
+        <div class="small-title">KHUSUS UNTUKMU</div>
+        <h2 class="main-title">Sepucuk Surat Cinta</h2>
+        <p class="section-desc">Aku menulis ini dari hati yang paling dalam untukmu...</p>
+      </div>
+
+      <div class="envelope-area">
+        <div class="envelope" id="envelope-letter" onclick="toggleEnvelope()">
+        <div class="flap"></div>
+        <div class="pocket"></div>
+        <div class="letter-sheet">
+          <div class="letter-content">      <h3>Teruntuk Sayangku,</h3>
+              <p>Hari ini di hari ulang tahunmu, aku ingin mengucapkan terima kasih karena kamu telah hadir melengkapi duniaku.</p>
+              <p>Setiap momen kecil bersamamu adalah lembaran terbaik yang pernah kutulis. Tetaplah menjadi orang yang hangat, ceria, dan penyayang seperti yang kukenal selama ini.</p>
+              <p>Aku berharap semua mimpi dan rencana baikmu dilancarkan semesta. Selamat ulang tahun, duniaku! 💕</p>
+              <p class="signature">Dengan penuh cinta,<br><b>Aku</b></p>
+            </div>
+          </div>
+          <div class="seal">❤️</div>
+        </div>
+        <p class="instruction">Klik amplop di atas untuk membuka surat</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-container" id="sec-timeline">
+  <div class="section-header">
+    <div class="small-title">KENANGAN KITA</div>
+    <h2 class="main-title">Momen Tak Terlupakan</h2>
+    <p class="section-desc">Setiap detik bersamamu adalah lembaran berharga dalam buku hidupku.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-line"></div>
+    
+    <div class="timeline-item left">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-img">
+          <img src="galeri/foto3.jpeg" alt="Momen 1">
+        </div>
+        <div class="timeline-info">
+          <span class="timeline-date">Hari Pertama Ketemu</span>
+          <h4>Awal Cerita Kita</h4>
+          <p>Obrolan kecil dan canggung di sudut kafe yang entah mengapa melahirkan rasa nyaman luar biasa.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item right">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-img">
+          <img src="galeri/foto4.jpg" alt="Momen 2">
+        </div>
+        <div class="timeline-info">
+          <span class="timeline-date">Sunset Berdua</span>
+          <h4>Langit Indah, Tapi Kamu Lebih Indah</h4>
+          <p>Saat kita berhenti sejenak melihat matahari terbenam. Pada saat itu aku tersadar, rumahku adalah kamu.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item left">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-img">
+          <img src="galeri/foto5.jpeg" alt="Momen 3">
+        </div>
+        <div class="timeline-info">
+          <span class="timeline-date">Konser Bareng</span>
+          <h4>Melodi yang Menyatukan Kita</h4>
+          <p>Bernyanyi lepas melupakan penat dunia. Bahagia itu sederhana, cukup bernyanyi konyol bersamamu.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-container" id="sec-wishes" style="background: var(--cream-2);">
+  <div class="section-header">
+    <div class="small-title">HARAPAN & DOA</div>
+    <h2 class="main-title">Seribu Harapan Untukmu</h2>
+    <p class="section-desc">Doa-doa terbaik yang kupanjatkan di setiap embusan napas untuk kebahagiaanmu.</p>
+  </div>
+
+  <div class="wishes-grid">
+    <div class="wish-card" onmouseenter="playWishAnimation(this)" onmouseleave="stopWishAnimation(this)">
+      <div class="wish-icon-container" aria-hidden="true">
+        <!-- Ikon: four-pointed sparkle (tanpa emoji) -->
+        <svg viewBox="0 0 100 100" width="80" height="80" xmlns="http://www.w3.org/2000/svg" class="wish-animation wish-star" role="img" aria-label="Selalu Bahagia">
+          <g fill="none" stroke="#c2416e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+            <!-- sparkle cross arms -->
+            <path d="M50 18 L50 35"/>
+            <path d="M50 65 L50 82"/>
+            <path d="M18 50 L35 50"/>
+            <path d="M65 50 L82 50"/>
+
+            <!-- small center diamond -->
+            <path d="M50 42 L58 50 L50 58 L42 50 Z"/>
+          </g>
+        </svg>
+      </div>
+      <h4>Selalu Bahagia</h4>
+      <p>Semoga setiap harimu dipenuhi senyuman tulus dan tawa lepas tanpa beban.</p>
+    </div>
+    <div class="wish-card" onmouseenter="playWishAnimation(this)" onmouseleave="stopWishAnimation(this)">
+      <div class="wish-icon-container" aria-hidden="true">
+        <!-- Ikon: three mini sparkles (tanpa emoji) -->
+        <svg viewBox="0 0 100 100" width="80" height="80" xmlns="http://www.w3.org/2000/svg" class="wish-animation wish-sparkle" role="img" aria-label="Mimpi Terwujud">
+          <g fill="none" stroke="#c2416e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3">
+            <!-- left sparkle -->
+            <path d="M28 52 L32 38 L36 52 L50 56 L36 60 L32 74 L28 60 L14 56 Z"/>
+            <!-- center sparkle -->
+            <path d="M50 28 L54 20 L58 28 L66 32 L58 36 L54 44 L50 36 L42 32 Z"/>
+            <!-- right sparkle -->
+            <path d="M72 52 L76 42 L80 52 L90 56 L80 60 L76 70 L72 60 L60 56 Z"/>
+          </g>
+        </svg>
+      </div>
+      <h4>Mimpi Terwujud</h4>
+      <p>Semoga semua impian besar dan cita-citamu tercapai satu per satu di tahun ini.</p>
+    </div>
+    <div class="wish-card" onmouseenter="playWishAnimation(this)" onmouseleave="stopWishAnimation(this)">
+      <div class="wish-icon-container" aria-hidden="true">
+        <!-- Ikon: clean heart outline (tanpa emoji, tanpa aksen tambahan) -->
+        <svg viewBox="0 0 100 100" width="80" height="80" xmlns="http://www.w3.org/2000/svg" class="wish-animation wish-heart" role="img" aria-label="Cinta Abadi">
+          <path d="M50 88
+                   C50 88, 18 68, 18 44
+                   C18 30, 28 20, 41 20
+                   C47 20, 50 24, 50 28
+                   C50 24, 53 20, 59 20
+                   C72 20, 82 30, 82 44
+                   C82 68, 50 88, 50 88 Z"
+                fill="none" stroke="#c2416e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h4>Cinta Abadi</h4>
+      <p>Semoga rasa sayang kita berdua terus tumbuh semakin kuat setiap detiknya.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section-container" id="galeri">
+  <div class="section-header">
+    <div class="small-title">GALERI FOTO</div>
+    <h2 class="main-title">Momen Indah Kita</h2>
+    <p class="section-desc">Setiap foto menyimpan cerita, setiap momen adalah hadiah berharga.</p>
+  </div>
+
+  <div class="gallery-filter">
+    <button class="filter-btn active" onclick="filterGallery('all', this)">Semua</button>
+    <button class="filter-btn" onclick="filterGallery('spesial', this)">Spesial</button>
+    <button class="filter-btn" onclick="filterGallery('cinta', this)">Cinta</button>
+    <button class="filter-btn" onclick="filterGallery('momen', this)">Momen</button>
+    <button class="filter-btn" onclick="filterGallery('jalan-jalan', this)">Jalan-jalan</button>
+  </div>
+
+  <div class="gallery-grid" id="gallery-grid">
+    <div class="gallery-item spesial" onclick="openGalleryModal(0)">
+      <img src="galeri/foto6.webp" alt="Kue Ulang Tahun">
+      <div class="item-overlay">
+        <h4>Kue Ulang Tahun</h4>
+        <span>Spesial</span>
+      </div>
+    </div>
+    <div class="gallery-item cinta" onclick="openGalleryModal(1)">
+      <img src="galeri/foto7.jpeg" alt="Malam Bersamamu">
+      <div class="item-overlay">
+        <h4>Malam Bersamamu</h4>
+        <span>Cinta</span>
+      </div>
+    </div>
+    <div class="gallery-item momen" onclick="openGalleryModal(2)">
+      <img src="galeri/foto8.jpeg" alt="Kemesraan Bahagia">
+      <div class="item-overlay">
+        <h4>Tawa Bahagia kita</h4>
+        <span>Momen</span>
+      </div>
+    </div>
+    <div class="gallery-item jalan-jalan" onclick="openGalleryModal(3)">
+      <img src="galeri/foto9.jpeg" alt="Liburan Berdua">
+      <div class="item-overlay">
+        <h4>Liburan Singkat</h4>
+        <span>Jalan-jalan</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer-sec">
+  <div class="footer-content">
+    <div class="quote-slider" id="quote-slider">
+      <div class="quote-slide active">“Cintamu adalah melodi yang terus bernyanyi dalam hatiku.”</div>
+      <div class="quote-slide">“Setiap detik bersamamu terasa seperti hadiah terindah.”</div>
+      <div class="quote-slide">“Kau adalah alasan senyumku setiap pagi.”</div>
+    </div>
+    <div class="heart-pulse">❤️</div>
+    <h2 class="footer-title">Selamat Ulang Tahun, Sayang!</h2>
+    <p>Semoga hari ulang tahunmu ini menjadi awal dari bab paling bahagia di hidupmu. Aku mencintaimu kemarin, hari ini, dan selamanya.</p>
+    <div class="footer-hearts">✨ ✨ ✨</div>
+    <span class="made-by">Dibuat dengan cinta oleh Aku</span>
+  </div>
+</div>
+
+<div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true">
+  <div class="lightbox-overlay" onclick="closeLightbox()"></div>
+  <div class="lightbox-content" role="document">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Tutup">×</button>
+    <div class="lightbox-panel">
+      <div class="lightbox-image">
+        <img id="lightbox-img" src="" alt="Foto detail galeri">
+      </div>
+      <div class="lightbox-copy">
+        <h3>Galeri Kenangan</h3>
+        <p id="lightbox-caption">Setiap foto menyimpan momen indah yang tak terlupakan.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY CAROUSEL MODAL -->
+<div id="gallery-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
+    <!-- Header Modal -->
+    <div class="flex items-center justify-between p-6 border-b border-gray-200">
+      <div>
+        <div class="text-sm font-semibold text-rose-600 tracking-widest">GALERI FOTO</div>
+        <h2 id="carousel-title" class="text-3xl font-bold text-gray-900 mt-2">Momen Indah Kita</h2>
+        <p id="carousel-subtitle" class="text-gray-600 text-base mt-2">Setiap foto menyimpan cerita, setiap momen adalah hadiah berharga.</p>
+      </div>
+      <button onclick="closeGalleryModal()" class="text-gray-500 hover:text-gray-700 text-3xl leading-none">×</button>
+    </div>
+
+    <!-- Carousel Container -->
+    <div class="p-8">
+      <div class="flex gap-6">
+        <!-- Image Section -->
+        <div class="flex-1 relative group">
+          <div class="relative bg-gray-100 rounded-2xl overflow-hidden" style="aspect-ratio: 4/5;">
+            <div id="carousel-container" class="relative w-full h-full">
+              <!-- Images will be dynamically inserted here -->
+              <img id="carousel-image-0" src="galeri/foto6.jpeg" alt="Foto carousel" class="carousel-image absolute inset-0 w-full h-full object-cover transition-opacity duration-500" style="opacity: 1;">
+              <img id="carousel-image-1" src="galeri/foto7.jpeg" alt="Foto carousel" class="carousel-image absolute inset-0 w-full h-full object-cover transition-opacity duration-500" style="opacity: 0;">
+              <img id="carousel-image-2" src="galeri/foto8.jpeg" alt="Foto carousel" class="carousel-image absolute inset-0 w-full h-full object-cover transition-opacity duration-500" style="opacity: 0;">
+              <img id="carousel-image-3" src="galeri/foto9.jpeg" alt="Foto carousel" class="carousel-image absolute inset-0 w-full h-full object-cover transition-opacity duration-500" style="opacity: 0;">
+            </div>
+
+            <!-- Navigation Arrows (Inside Image) -->
+            <button onclick="prevCarouselSlide()" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-900 rounded-full w-12 h-12 flex items-center justify-center text-2xl transition-all duration-300 z-10 group-hover:left-2">
+              ‹
+            </button>
+            <button onclick="nextCarouselSlide()" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-900 rounded-full w-12 h-12 flex items-center justify-center text-2xl transition-all duration-300 z-10 group-hover:right-2">
+              ›
+            </button>
+          </div>
+
+          <!-- Navigation Arrows (Outside Image - Below) -->
+          <div class="flex gap-4 justify-center mt-6">
+            <button onclick="prevCarouselSlide()" class="bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white rounded-full w-14 h-14 flex items-center justify-center text-2xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+              ‹
+            </button>
+            <button onclick="nextCarouselSlide()" class="bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white rounded-full w-14 h-14 flex items-center justify-center text-2xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+              ›
+            </button>
+          </div>
+
+          <!-- Slide Indicators -->
+          <div id="carousel-dots" class="flex gap-3 justify-center mt-6">
+            <!-- Dots will be dynamically inserted here -->
+          </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="flex-1 flex flex-col justify-between">
+          <div>
+            <h3 id="carousel-image-title" class="text-2xl font-bold text-gray-900 mb-4">Kue Ulang Tahun</h3>
+            <p id="carousel-image-description" class="text-gray-700 text-lg leading-relaxed mb-6">
+              Setiap momen spesial bersama menciptakan kenangan yang akan selamanya tertanam di hati saya.
+            </p>
+            <div class="flex gap-3 mb-6">
+              <span id="carousel-image-tag" class="inline-block px-4 py-2 bg-rose-100 text-rose-700 rounded-full text-sm font-semibold">
+                Spesial
+              </span>
+            </div>
+          </div>
+
+          <!-- Photo Details -->
+          <div class="space-y-4 pt-6 border-t border-gray-200">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-600 font-medium">Foto</span>
+              <span id="carousel-counter" class="text-rose-600 font-bold text-lg">1 / 4</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+              <div id="carousel-progress" class="bg-gradient-to-r from-rose-500 to-rose-600 h-2 rounded-full transition-all duration-500" style="width: 25%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Trigger Button (untuk testing, bisa dihapus atau diubah) -->
+<button onclick="openGalleryModal()" id="gallery-modal-trigger" class="hidden fixed bottom-8 right-8 bg-gradient-to-r from-rose-500 to-rose-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 z-40">
+  Buka Galeri
+</button>
+
+
+<script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</body>
+</html>
